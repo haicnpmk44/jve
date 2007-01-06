@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<project name="jgve" default="build" basedir=".">
-	<!-- MODIFICAR O DEFAULT (para excultar...) -->
+<project name="jgve" default="compile" basedir=".">
 
 	<description> Java grid video editor </description>
 
@@ -9,9 +8,7 @@
 	<property name="lib.dir" location="lib" />
 	<property name="test.dir" location="test" />
 
-	<!--   <property name="testes.report.dir"  value="report"/> -->
-
-	<path id="classpath.path">
+	<path id="classpath">
 		<pathelement location="${build.dir}" />
 		<pathelement location="${test.dir}" />
 		<fileset dir="${lib.dir}">
@@ -19,32 +16,27 @@
 		</fileset>
 	</path>
 
-
 	<target name="init">
-		<echo> Criando diretorios... </echo>
+		<echo> Creating the build directory </echo>
 		<mkdir dir="${build.dir}" />
-		<mkdir dir="${src.dir}" />
-		<mkdir dir="${lib.dir}" />
 		<tstamp />
 	</target>
 
-	<target name="build" depends="init" description="compila os fontes">
-		<echo> Compilando os fontes... </echo>
+	<target name="clean" description="clean the build directory">
+		<delete dir="${build.dir}" />
+	</target>
+
+	<target name="compile" depends="init" description="compile the source code">
+		<echo> Compiling the source code </echo>
 		<javac srcdir="${src.dir}" destdir="${build.dir}" deprecation="on" debug="on">
 			<classpath>
-				<path refid="classpath.path" />
+				<path refid="classpath" />
 			</classpath>
 		</javac>
 	</target>
 
 
-	<target name="clean" description="limpa a estrutura de diretorios">
-		<echo> Limpando a estrutura de diretorios... </echo>
-		<delete dir="${build.dir}" />
-	</target>
-
-
-	<target name="run" depends="build">
+	<target name="run" depends="compile">
 		<echo> Execultando a aplicacao... </echo>
 		<java classname="view.text.PhotoArchive" fork="no">
 			<classpath>
@@ -54,7 +46,6 @@
 			</classpath>
 		</java>
 	</target>
-
 
 
 	<target name="test" depends="init" description="executa os testes">
