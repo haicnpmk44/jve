@@ -23,13 +23,21 @@ package video.effects;
  * VideoEffect.java created in 24/12/2006 - 11:19:29 AM
  * @author Thiago Nóbrega ( thiagonobrega at gmail dot com )
  */
-import javax.media.*;
-import javax.media.format.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.*;
+import image.filters.Filter;
+
+import java.awt.Dimension;
+import java.awt.image.BufferedImage;
+
+import javax.media.Buffer;
+import javax.media.Codec;
+import javax.media.Effect;
+import javax.media.Format;
+import javax.media.PlugIn;
+import javax.media.ResourceUnavailableException;
+import javax.media.format.RGBFormat;
+import javax.media.format.VideoFormat;
+
 import com.sun.media.codec.video.colorspace.JavaRGBConverter;
-import javax.media.util.BufferToImage;
 
 /**
  *
