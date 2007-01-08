@@ -2,24 +2,26 @@
  * Created on May 13, 2005 , by Thiago N�brega
  *
  */
-package image.filters.spatial.nolinear;
+package image.filters.statics.spatial.nolinear;
 
-import image.filters.spatial.SpatialFilter;
+import image.filters.statics.spatials.SpatialFilter;
 import image.util.Mask;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.util.TreeSet;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
- * Filtro da mediana este filtro calcula a media da area e faz um suaviza��o dos
- * contrastes diminuindo os contornos
+ * Filtro road
+ *
  *
  *
  * @author Thiago N�brega <thiagonobrega@gmail.com>
  *
  */
-public class MedianFilter extends SpatialFilter {
+public class RoadFilter extends SpatialFilter {
 
 	/**
 	 * Cria um um novo filtro da media
@@ -27,8 +29,8 @@ public class MedianFilter extends SpatialFilter {
 	 * @param m
 	 * @param image
 	 */
-	public MedianFilter(Mask m, BufferedImage image) {
-		super(m, image, "Median Filter");
+	public RoadFilter(BufferedImage image) {
+		super(new Mask(3), image, "Road Filter");
 	}
 
 	/**
@@ -36,13 +38,12 @@ public class MedianFilter extends SpatialFilter {
 	 * a mascara e de ordedm 3
 	 *
 	 * @param image
-	 *
+	 * @param mask
+	 *            o tamnho da mascara
 	 */
-	public MedianFilter(BufferedImage image) {
-		super(null, image, "Median Filter");
-		Mask ma = new Mask(3);
-		ma.setAll(1);
-		this.setMask(ma);
+	public RoadFilter(BufferedImage image, int mask) {
+		super(new Mask(mask), image, "Road Filter");
+
 	}
 
 	/**
@@ -85,9 +86,9 @@ public class MedianFilter extends SpatialFilter {
 	 */
 	private Color aplicaMascara(int c, int l, BufferedImage pic, Mask m) {
 
-		TreeSet<Integer> red = new TreeSet<Integer>();
-		TreeSet<Integer> green = new TreeSet<Integer>();
-		TreeSet<Integer> blue = new TreeSet<Integer>();
+		List<Integer> red = new LinkedList<Integer>();
+		List<Integer> green = new LinkedList<Integer>();
+		List<Integer> blue = new LinkedList<Integer>();
 
 		int n = Math.round(m.getOrdem() / 2);
 
@@ -97,23 +98,42 @@ public class MedianFilter extends SpatialFilter {
 				int imagemLinha = l + i;
 				int imagemColuna = c + o;
 
+				Color central = new Color(pic.getRGB(c, l));
 				Color cor = new Color(pic.getRGB(imagemColuna, imagemLinha));
 
-				red.add(cor.getRed());
-				green.add(cor.getGreen());
-				blue.add(cor.getBlue());
+				// if (imagemLinha!=l && imagemColuna!=c ){
+				red.add(Math.abs(cor.getRed() - central.getRed()));
+				green.add(Math.abs(cor.getGreen() - central.getGreen()));
+				blue.add(Math.abs(cor.getBlue() - central.getBlue()));
+				// }
 
 			}// linha
 
 		}// coluna
-
+		/***********************************************************************
+		 * for (int i : red ){ System.out.println(i); }
+		 **********************************************************************/
 		Object[] r = red.toArray();
 		Object[] g = green.toArray();
 		Object[] b = blue.toArray();
-		Color out = new Color(Integer.parseInt(r[Math.round(red.size() / 2)]
-				.toString()), Integer.parseInt(g[Math.round(green.size() / 2)]
-				.toString()), Integer.parseInt(b[Math.round(blue.size() / 2)]
-				.toString()));
+
+		Arrays.sort(r);
+		Arrays.sort(g);
+		Arrays.sort(b);
+
+		int vermelho = 0;
+		int verde = 0;
+		int azul = 0;
+
+		for (int i = 0; i < 4; i++) {
+
+			vermelho += Integer.parseInt(r[i].toString());
+			verde += Integer.parseInt(g[i].toString());
+			azul += Integer.parseInt(b[i].toString());
+
+		}
+
+		Color out = new Color(ajusta(vermelho), ajusta(verde), ajusta(azul));
 
 		return out;
 	}
