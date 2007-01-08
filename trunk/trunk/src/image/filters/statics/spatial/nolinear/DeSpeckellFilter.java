@@ -2,9 +2,9 @@
  * Created on May 13, 2005 , by Thiago N�brega
  *
  */
-package image.filters.spatial.nolinear;
+package image.filters.statics.spatial.nolinear;
 
-import image.filters.spatial.SpatialFilter;
+import image.filters.statics.spatials.SpatialFilter;
 import image.util.Mask;
 
 import java.awt.Color;
