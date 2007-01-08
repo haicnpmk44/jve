@@ -4,8 +4,8 @@
  */
 package video.effects;
 
-import image.filters.pontual.aritimetics.ADDFilter;
-import image.filters.spatial.SpatialFilter;
+import image.filters.statics.pontuals.aritimetics.ADDFilter;
+import image.filters.statics.spatials.SpatialFilter;
 import image.util.Mask;
 
 import java.awt.Color;
@@ -55,10 +55,9 @@ public class DetectFilter extends SpatialFilter {
 //		ma.setPoint(2,0,1);
 //		ma.setPoint(2,1,2);
 //		ma.setPoint(2,2,1);
-		ma.setAll(1);
-		ma.setPoint(1, 2, 0);
-		ma.setPoint(2, 1, 0);
-		ma.setPoint(2, 2, 0);
+		ma.setAll(-1);
+		ma.setPoint(1, 1, 8);
+
 
 		this.setMask(ma);
 
@@ -85,6 +84,8 @@ public class DetectFilter extends SpatialFilter {
 		ma.setPoint(2,0,1);
 		ma.setPoint(2,1,2);
 		ma.setPoint(2,2,1);
+		ma.setAll(-1);
+		ma.setPoint(1, 1, 8);
 
 		this.setMask(ma);
 		this.constant = constant;
