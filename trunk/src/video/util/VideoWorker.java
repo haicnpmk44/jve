@@ -14,7 +14,6 @@ import javax.media.NoProcessorException;
 import javax.media.NotConfiguredError;
 import javax.media.NotRealizedError;
 import javax.media.Processor;
-import javax.media.StopAtTimeEvent;
 import javax.media.UnsupportedPlugInException;
 import javax.media.control.TrackControl;
 import javax.media.format.AudioFormat;
@@ -22,8 +21,10 @@ import javax.media.format.VideoFormat;
 import javax.media.protocol.ContentDescriptor;
 import javax.media.protocol.DataSource;
 
-import video.effects.DetectFilter;
+import org.apache.log4j.Logger;
+
 import video.effects.TesteEffect;
+import engine.logging.LogUtil;
 
 /**
  * Sample program to access individual video frames by using a "pass-thru"
@@ -32,6 +33,8 @@ import video.effects.TesteEffect;
  */
 public class VideoWorker implements ControllerListener {
 
+
+	private Logger logger = LogUtil.getLog(VideoWorker.class);
 	private MediaLocator in, out;
 	private DataSink ds;
 	private boolean fileDone;
@@ -225,10 +228,9 @@ public class VideoWorker implements ControllerListener {
 
 	public void controllerUpdate(ControllerEvent event) {
 
-		System.err.println(event.toString());
+		logger.debug(event.toString());
 		if (event instanceof EndOfMediaEvent) {
-			//TODO CHANGE SYSO TO LOG4J
-			System.out.println("eofMedia");
+			logger.debug("End of media found");
 			fileDone = true;
 		}
 
