@@ -22,6 +22,7 @@ import javax.media.format.VideoFormat;
 import javax.media.protocol.ContentDescriptor;
 import javax.media.protocol.DataSource;
 
+import video.effects.DetectFilter;
 import video.effects.TesteEffect;
 
 /**
@@ -78,6 +79,12 @@ public class VideoWorker implements ControllerListener {
 		// Start the processor.
 		p.start();
 		waitForFileDone();
+		// STOPING PLAYER
+		p.stop();
+		p.close();
+		// STOPING DATASINK
+		ds.stop();
+		ds.close();
 	}
 
 	/**
@@ -93,16 +100,17 @@ public class VideoWorker implements ControllerListener {
 			throw new NotConfiguredError("Unable to configure the processor!");
 
 		for (ContentDescriptor s : p.getSupportedContentDescriptors()) {
-			// System.out.println(s);
+			 //System.out.println(s);
 			if (s.toString().equalsIgnoreCase("AVI"))
 				p.setContentDescriptor(s);
 		}
 
-		p.addControllerListener(this);
 
 		if (p.getContentDescriptor() == null)
 			p.setContentDescriptor(new ContentDescriptor(
 							ContentDescriptor.RAW));
+
+		p.addControllerListener(this);
 	}
 
 	/**
@@ -212,7 +220,6 @@ public class VideoWorker implements ControllerListener {
 			} catch (Exception e) {
 			}
 		}
-		System.err.println("");
 		return true;
 	}
 
@@ -220,10 +227,8 @@ public class VideoWorker implements ControllerListener {
 
 		System.err.println(event.toString());
 		if (event instanceof EndOfMediaEvent) {
+			//TODO CHANGE SYSO TO LOG4J
 			System.out.println("eofMedia");
-			ds.close();
-			p.stop();
-			p.close();
 			fileDone = true;
 		}
 
