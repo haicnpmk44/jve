@@ -118,33 +118,28 @@ public abstract class VideoEffect implements Effect {
 
 	public boolean processFrame(Buffer inBuffer, Buffer outBuffer, int srcWidth, int srcHeight) {
 
-		try {
-			if (converterIn == null || converterOut == null) {
-				setUpConverters((VideoFormat) inBuffer.getFormat(), srcWidth,
-						srcHeight);
-			}
-
-			if (converterIn.process(inBuffer, tempBuffer) != PlugIn.BUFFER_PROCESSED_OK)
-				return false;
-
-			bimg.setRGB(0, 0, srcWidth, srcHeight,
-					(int[]) tempBuffer.getData(), 0, srcWidth);
-
-			//makes the magic whith one image
-			BufferedImage timg = processImage(bimg);
-			bimg = timg;
-
-
-			bimg.getRGB(0, 0, srcWidth, srcHeight,
-					(int[]) tempBuffer.getData(), 0, srcWidth);
-
-			if (converterOut.process(tempBuffer, outBuffer) != PlugIn.BUFFER_PROCESSED_OK)
-				return false;
-
-		} catch (Exception e) {
-			System.err.println("Exception " + e);
-			return false;
+		if (converterIn == null || converterOut == null) {
+			setUpConverters((VideoFormat) inBuffer.getFormat(), srcWidth,
+					srcHeight);
 		}
+
+		if (converterIn.process(inBuffer, tempBuffer) != PlugIn.BUFFER_PROCESSED_OK)
+			return false;
+
+		bimg.setRGB(0, 0, srcWidth, srcHeight,
+				(int[]) tempBuffer.getData(), 0, srcWidth);
+
+		//makes the magic whith one image
+		BufferedImage timg = processImage(bimg);
+		bimg = timg;
+
+
+		bimg.getRGB(0, 0, srcWidth, srcHeight,
+				(int[]) tempBuffer.getData(), 0, srcWidth);
+
+		if (converterOut.process(tempBuffer, outBuffer) != PlugIn.BUFFER_PROCESSED_OK)
+			return false;
+
 		return true;
 	}
 
