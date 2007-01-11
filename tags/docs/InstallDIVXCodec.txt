@@ -1,0 +1,26 @@
+The Java Media Framework comes with a tool JMFRegistry to add codecs. It is available from the jmf.jar file, or from the "Preferences..." menu option in JMStudio. Alternatively type "java JMFRegistry" from the commandline.
+
+Linux
+cp fo4*.so JAVA_HOME/JRE/LIB/I386
+
+Include the $FOBS_HOME/lib directory into LD_LIBRARY_PATH.
+Windows (MinGW)
+
+Copy fobs4jmf.dll to windows/system32 directory.
+
+
+
+5. Register plugin in JMF
+
+   1. Launch JMStudio (java JMStudio).
+   2. Go to File->Preferences
+   3. Enter the "Plugins" tab
+   4. In the "Demultiplexer" tab, add the class "com.omnividea.media.parser.video.Parser" and commit. See screenshot.
+   5. In the "Codec" tab, add the class "com.omnividea.media.codec.video.NativeDecoder" and commit. See screenshot.
+   6. In the "Codec" tab, add the class "com.omnividea.media.codec.audio.NativeDecoder" and commit. See screenshot.
+   7. In the "Codec" tab, add the class "com.omnividea.media.codec.video.JavaDecoder" and commit. See screenshot.
+   8. Go to the "Packages" tab
+   9. Include "com.omnividea" in both the Protocol Prefix and the Context Prefix list. Move both of them up to the first position. Commit both. See screenshot.
+
+ --------------
+baixar as libs de windows e gerar um versao para windows
