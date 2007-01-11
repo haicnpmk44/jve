@@ -24,8 +24,8 @@
 package video.effects;
 
 import image.filters.FilterException;
+import image.filters.motion.BorderMotionDetectionFilter;
 import image.filters.motion.MotionFilter;
-import image.filters.motion.PontualMotionDetectionFilter;
 
 import java.awt.image.BufferedImage;
 
@@ -35,7 +35,7 @@ public class TesteEffect extends VideoEffect {
 
 	public TesteEffect(){
 		super();
-		frameEfx = new PontualMotionDetectionFilter();
+		frameEfx = new BorderMotionDetectionFilter();
 	}
 	/* (non-Javadoc)
 	 * @see video.effects.VideoEffect#getEffectName()
