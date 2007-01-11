@@ -1,14 +1,4 @@
-import java.io.IOException;
-
-import javax.media.MediaLocator;
-import javax.media.NoDataSinkException;
-import javax.media.NoProcessorException;
-import javax.media.NotConfiguredError;
-import javax.media.NotRealizedError;
-import javax.media.UnsupportedPlugInException;
-
-import video.util.VideoWorker;
-/**
+/*
  *
  * JGVE - J Grid Video Editor.
  *
@@ -32,6 +22,16 @@ import video.util.VideoWorker;
  * TesteVideoWorker.java created in 27/12/2006 - 2:32:43 AM
  * @author Thiago Nóbrega ( thiagonobrega at gmail dot com )
  */
+import java.io.IOException;
+
+import javax.media.MediaLocator;
+import javax.media.NoDataSinkException;
+import javax.media.NoProcessorException;
+import javax.media.NotConfiguredError;
+import javax.media.NotRealizedError;
+import javax.media.UnsupportedPlugInException;
+
+import video.util.VideoWorker;
 
 public class TesteVideoWorker {
 	/**
@@ -39,14 +39,20 @@ public class TesteVideoWorker {
 	 */
 	public static void main(String[] args) {
 
-		//String url ="file://home/thiago/MeusDocumentos/ufcg/smultimidia/bluescreen2.mov";
-		//String url = "file://home/thiago/MeusDocumentos/ufcg/smultimidia/pinguin.mpg";
-		String out = "file://home/thiago/Desktop/out.avi";
-		String url = "file://home/thiago/MeusDocumentos/ufcg/smultimidia/s.mpg";
-		// String url =
-		// "file://home/thiago/MeusDocumentos/ufcg/smultimidia/clip01.mpg";
+//		String url ="file://home/thiago/workspace/java/jgve/resources/scam.avi";
+//		String url ="file://home/thiago/workspace/java/jgve/resources/clip01.mpg";
+//		String url ="file://home/thiago/MeusDocumentos/ufcg/smultimidia/bluescreen2.mov";
+//		String url ="file://home/thiago/workspace/java/jgve/resources/ToyotaPriusSelfParki.avi";
+//		String url ="file://home/thiago/workspace/java/jgve/resources/sky.mpg";
+		String url ="file://home/thiago/workspace/java/jgve/resources/PariRollerVideo.avi";
+//		String url = "file://home/thiago/MeusDocumentos/ufcg/smultimidia/pinguin.mpg";
+//		String url = "file://home/thiago/MeusDocumentos/ufcg/smultimidia/s.mpg";
 
-		MediaLocator ml;
+
+
+		String out = "file://home/thiago/Desktop/out.avi";
+
+
 
 		VideoWorker fa = new VideoWorker(new MediaLocator(url),new MediaLocator(out));
 
@@ -55,24 +61,31 @@ public class TesteVideoWorker {
 			fa.open();
 		} catch (NoProcessorException e) {
 			// TODO Auto-generated catch block
+			System.out.println("!!!");
 			e.printStackTrace();
 		} catch (UnsupportedPlugInException e) {
 			// TODO Auto-generated catch block
+			System.out.println("!!!");
 			e.printStackTrace();
 		} catch (NotConfiguredError e) {
 			// TODO Auto-generated catch block
+			System.out.println("!!!");
 			e.printStackTrace();
 		} catch (NotRealizedError e) {
 			// TODO Auto-generated catch block
+			System.out.println("!!!");
 			e.printStackTrace();
 		} catch (NoDataSinkException e) {
 			// TODO Auto-generated catch block
+			System.out.println("!!!");
 			e.printStackTrace();
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
+			System.out.println("!!!");
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			System.out.println("!!!");
 			e.printStackTrace();
 		}
 
