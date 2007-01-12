@@ -3,7 +3,7 @@ import javax.media.MediaLocator;
 import javax.media.Processor;
 import javax.media.Time;
 
-import video.util.Scissors;
+import video.util.segmentation.Scissors;
 
 
 public class TestScissor {
