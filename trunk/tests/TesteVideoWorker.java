@@ -44,7 +44,8 @@ public class TesteVideoWorker {
 //		String url ="file://home/thiago/MeusDocumentos/ufcg/smultimidia/bluescreen2.mov";
 //		String url ="file://home/thiago/workspace/java/jgve/resources/ToyotaPriusSelfParki.avi";
 //		String url ="file://home/thiago/workspace/java/jgve/resources/sky.mpg";
-		String url ="file://home/thiago/workspace/java/jgve/resources/PariRollerVideo.avi";
+//		String url ="file://home/thiago/workspace/java/jgve/resources/PariRollerVideo.avi";
+		String url ="file://home/thiago/workspace/java/jgve/resources/SexAccident.avi";
 //		String url = "file://home/thiago/MeusDocumentos/ufcg/smultimidia/pinguin.mpg";
 //		String url = "file://home/thiago/MeusDocumentos/ufcg/smultimidia/s.mpg";
 
