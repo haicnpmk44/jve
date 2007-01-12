@@ -24,10 +24,11 @@
 package video.effects;
 
 import image.filters.FilterException;
-import image.filters.motion.BorderMotionDetectionFilter;
-import image.filters.motion.MotionFilter;
 
 import java.awt.image.BufferedImage;
+
+import video.filters.MotionFilter;
+import video.filters.motion.BorderMotionDetectionFilter;
 
 public class TesteEffect extends VideoEffect {
 
