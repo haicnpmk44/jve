@@ -37,7 +37,13 @@ import javax.media.ResourceUnavailableException;
 import javax.media.format.RGBFormat;
 import javax.media.format.VideoFormat;
 
+import org.apache.log4j.Logger;
+
+import video.util.VideoWorker;
+
 import com.sun.media.codec.video.colorspace.JavaRGBConverter;
+
+import engine.logging.LogUtil;
 
 /**
  *
@@ -49,22 +55,26 @@ import com.sun.media.codec.video.colorspace.JavaRGBConverter;
  */
 public abstract class VideoEffect implements Effect {
 
+	private Logger logger = LogUtil.getLog(VideoEffect.class);
+
 	private String efxName;
 
-	Format inputFormat;
-	Format outputFormat;
+	private Format inputFormat;
+	private Format outputFormat;
 
-	Format[] inputFormats;
-	Format[] outputFormats;
+	private Format[] inputFormats;
+	private Format[] outputFormats;
 
-	Codec converterIn;
-	Codec converterOut;
+	private Codec converterIn;
+	private Codec converterOut;
 
-	BufferedImage bimg;
+	private BufferedImage bimg;
 
-	Buffer tempBuffer;
+	private Buffer tempBuffer;
 
 	public VideoEffect() {
+
+		logger.debug("Video Efect created");
 
 		inputFormats = new Format[] { new RGBFormat(null, Format.NOT_SPECIFIED,
 				Format.byteArray, Format.NOT_SPECIFIED, 24, 3, 2, 1, 3,
@@ -122,6 +132,8 @@ public abstract class VideoEffect implements Effect {
 			setUpConverters((VideoFormat) inBuffer.getFormat(), srcWidth,
 					srcHeight);
 		}
+
+		logger.info("Frame #"+inBuffer.getSequenceNumber()+" processed!");
 
 		if (converterIn.process(inBuffer, tempBuffer) != PlugIn.BUFFER_PROCESSED_OK)
 			return false;

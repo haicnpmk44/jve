@@ -62,7 +62,7 @@ public class VideoWorker implements ControllerListener {
 		// Obtain the track controls.
 		TrackControl videoTrack = extractVideoTrack();
 
-		System.out.println("Video format: " + videoTrack.getFormat());
+		logger.info("Video format: " + videoTrack.getFormat());
 
 		// setup the codecs in the track
 		Codec codec[] = { new TesteEffect() };
@@ -103,7 +103,7 @@ public class VideoWorker implements ControllerListener {
 			throw new NotConfiguredError("Unable to configure the processor!");
 
 		for (ContentDescriptor s : p.getSupportedContentDescriptors()) {
-			 //System.out.println(s);
+			 logger.debug(s);
 			if (s.toString().equalsIgnoreCase("AVI"))
 				p.setContentDescriptor(s);
 		}
@@ -218,7 +218,7 @@ public class VideoWorker implements ControllerListener {
 			try {
 				while (!fileDone) {
 					waitFileSync.wait(1000);
-					System.err.print(".");
+					//System.err.print(".");
 				}
 			} catch (Exception e) {
 			}
@@ -228,7 +228,6 @@ public class VideoWorker implements ControllerListener {
 
 	public void controllerUpdate(ControllerEvent event) {
 
-		logger.debug(event.toString());
 		if (event instanceof EndOfMediaEvent) {
 			logger.debug("End of media found");
 			fileDone = true;
