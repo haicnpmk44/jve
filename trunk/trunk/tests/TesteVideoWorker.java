@@ -39,13 +39,15 @@ public class TesteVideoWorker {
 	 */
 	public static void main(String[] args) {
 
-//		String url ="file://home/thiago/workspace/java/jgve/resources/scam.avi";
+//		String url ="file://home/thiago/workspace/java/jgve/resources/scirrhous2.mpg";
 //		String url ="file://home/thiago/workspace/java/jgve/resources/clip01.mpg";
 //		String url ="file://home/thiago/MeusDocumentos/ufcg/smultimidia/bluescreen2.mov";
-//		String url ="file://home/thiago/workspace/java/jgve/resources/ToyotaPriusSelfParki.avi";
+//		String url ="file://home/thiago/workspace/java/jgve/resources/UFO.avi";
+//		String url ="file://home/thiago/workspace/java/jgve/resources/l.avi";
+		String url ="file://home/thiago/workspace/java/jgve/resources/01.avi";
 //		String url ="file://home/thiago/workspace/java/jgve/resources/sky.mpg";
 //		String url ="file://home/thiago/workspace/java/jgve/resources/PariRollerVideo.avi";
-		String url ="file://home/thiago/workspace/java/jgve/resources/SexAccident.avi";
+		//String url ="file://home/thiago/workspace/java/jgve/resources/sampleN01.avi";
 //		String url = "file://home/thiago/MeusDocumentos/ufcg/smultimidia/pinguin.mpg";
 //		String url = "file://home/thiago/MeusDocumentos/ufcg/smultimidia/s.mpg";
 
