@@ -28,7 +28,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -57,6 +56,7 @@ public class KeyboardReader implements Runnable {
 
 	private String[] instructions;
 
+	private List<String> userFiltersName;
 	private Map<String,VideoEffect> userFilters;
 
 	private String[] filterList;
@@ -69,10 +69,14 @@ public class KeyboardReader implements Runnable {
 
 		in.useDelimiter("\n");
 
-		instructions = new String[] { Messages.getString("command.new") ,
-				Messages.getString("command.apply") };
+		instructions = new String[] { Messages.getString("command.exit"),
+				Messages.getString("command.help") ,
+				Messages.getString("command.new") ,
+				Messages.getString("command.apply"),
+				Messages.getString("command.list.user.filters") };
 
 		userFilters = new HashMap<String,VideoEffect>();
+		userFiltersName = new LinkedList<String>();
 
 		filterList = new String[] { Messages.getString("filter.motion.detect") };
 
@@ -95,7 +99,7 @@ public class KeyboardReader implements Runnable {
 					StringTokenizer word = new StringTokenizer(line, " ");
 
 					// verify if has a valid entry
-					if (word.countTokens() <= 3)
+					if (word.countTokens() <= 0)
 						throw new UIException(MessagesErros
 								.getString("error.inavlid.arguments.numbers"));
 
@@ -105,11 +109,21 @@ public class KeyboardReader implements Runnable {
 
 					switch (instruction) {
 
-					case 0: // new insttuction.
+					case 0:
+						System.out.println(Messages.getString("sucess.exit"));
+						System.exit(0);
+						break;
+					case 1:
+						System.out.println(Messages.getString("help.textui.usage"));
+						break;
+					case 2: // new insttuction.
 						createNewFilter(word);
 						break;
-					case 1: // apply
+					case 3: // apply
 						applyFilters(word);
+						break;
+					case 4: // list
+						listUserFilters();
 						break;
 					default:
 						System.out.println("?");
@@ -124,6 +138,14 @@ public class KeyboardReader implements Runnable {
 
 		}// while true
 
+	}
+
+	private void listUserFilters() {
+		System.out.print("[ ");
+		for (String s : userFiltersName ) {
+			System.out.print(s + " ");
+		}
+		System.out.println("]");
 	}
 
 	private void applyFilters(StringTokenizer word) throws UIException, NoProcessorException, UnsupportedPlugInException, NotConfiguredError, NotRealizedError, NoDataSinkException, SecurityException, IOException {
@@ -157,10 +179,9 @@ public class KeyboardReader implements Runnable {
 
 		}
 
-		System.err.println("-#"+n);
+
 		if ( n.equalsIgnoreCase(Messages.getString("command.input")) ){
 			input = word.nextToken();
-			System.out.println("r"+input);
 			inputFile = new File(input);
 		}
 
@@ -171,10 +192,10 @@ public class KeyboardReader implements Runnable {
 
 		//verificacoes
 
-//		if ( ! inputFile.exists() )
-//			throw new UIException(MessagesErros.getString("error.file.cantfind.input")+input+".");
-//		if ( output == null )
-//			throw new UIException(MessagesErros.getString("error.file.exist.output"));
+		if ( ! inputFile.exists() )
+			throw new UIException(MessagesErros.getString("error.file.cantfind.input")+input+".");
+		if ( output == null )
+			throw new UIException(MessagesErros.getString("error.file.exist.output"));
 
 		String filePrefix = "file:/";
 
@@ -271,6 +292,7 @@ public class KeyboardReader implements Runnable {
 				: new BorderMotionDetectionFilter(color);
 
 		userFilters.put(filterAlias,new MotionDetectEffect(thisFilter));
+		userFiltersName.add(filterAlias);
 
 		System.out.println(Messages.getString("sucess.textui.filters.create"));
 	}
