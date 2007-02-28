@@ -23,7 +23,7 @@ import javax.media.protocol.DataSource;
 
 import org.apache.log4j.Logger;
 
-import video.effects.TesteEffect;
+import video.effects.MotionDetectEffect;
 import engine.logging.LogUtil;
 
 /**
@@ -39,6 +39,7 @@ public class VideoWorker implements ControllerListener {
 	private DataSink ds;
 	private boolean fileDone;
 	private Processor p;
+	private Codec[] codec;
 
 	Object waitSync = new Object();
 	Object waitFileSync = new Object();
@@ -51,6 +52,7 @@ public class VideoWorker implements ControllerListener {
 		this.in = in;
 		this.out = out;
 		this.fileDone = false;
+		Codec codec[] = {  };
 	}
 
 	public void open() throws NoProcessorException, IOException,
@@ -65,7 +67,7 @@ public class VideoWorker implements ControllerListener {
 		logger.info("Video format: " + videoTrack.getFormat());
 
 		// setup the codecs in the track
-		Codec codec[] = { new TesteEffect() };
+
 		videoTrack.setCodecChain(codec);
 
 		// realize the processor
@@ -233,6 +235,9 @@ public class VideoWorker implements ControllerListener {
 			fileDone = true;
 		}
 
+	}
+	public void setCodec(Codec[] codec) {
+		this.codec = codec;
 	}
 
 }
