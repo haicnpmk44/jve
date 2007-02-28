@@ -155,8 +155,6 @@ public class KeyboardReader implements Runnable {
 		String output = null;
 		String n = null;
 
-		System.err.println("num1#"+word.countTokens());
-
 		boolean outFlag = false;
 		while ( ! outFlag ){
 

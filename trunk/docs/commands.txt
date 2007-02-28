@@ -1,0 +1,6 @@
+new filter motiondetect mf1
+list
+apply -f mf1 -input /home/thiago/workspace/java/jgve/resources/01.avi -output /tmp/oi.avi
+
+
+clear filters //limpar filtros
