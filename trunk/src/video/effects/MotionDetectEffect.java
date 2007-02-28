@@ -30,13 +30,18 @@ import java.awt.image.BufferedImage;
 import video.filters.MotionFilter;
 import video.filters.motion.BorderMotionDetectionFilter;
 
-public class TesteEffect extends VideoEffect {
+public class MotionDetectEffect extends VideoEffect {
 
 	private MotionFilter frameEfx;
 
-	public TesteEffect(){
+	public MotionDetectEffect(){
 		super();
 		frameEfx = new BorderMotionDetectionFilter();
+	}
+
+	public MotionDetectEffect(MotionFilter f){
+		super();
+		frameEfx = f;
 	}
 	/* (non-Javadoc)
 	 * @see video.effects.VideoEffect#getEffectName()

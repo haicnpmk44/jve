@@ -24,6 +24,7 @@
  */
 import java.io.IOException;
 
+import javax.media.Codec;
 import javax.media.MediaLocator;
 import javax.media.NoDataSinkException;
 import javax.media.NoProcessorException;
@@ -31,6 +32,7 @@ import javax.media.NotConfiguredError;
 import javax.media.NotRealizedError;
 import javax.media.UnsupportedPlugInException;
 
+import video.effects.MotionDetectEffect;
 import video.util.VideoWorker;
 
 public class TesteVideoWorker {
@@ -58,6 +60,8 @@ public class TesteVideoWorker {
 
 
 		VideoWorker fa = new VideoWorker(new MediaLocator(url),new MediaLocator(out));
+		Codec codec[] = {new MotionDetectEffect()};
+		fa.setCodec(codec);
 
 		// TODO PROBLEMAS DE SICRONIZAÇÃO
 		try {
