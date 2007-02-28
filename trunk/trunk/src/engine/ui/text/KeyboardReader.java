@@ -23,15 +23,30 @@
  */
 package engine.ui.text;
 
-import image.filters.Filter;
-
 import java.awt.Color;
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
+import javax.media.Codec;
+import javax.media.MediaLocator;
+import javax.media.NoDataSinkException;
+import javax.media.NoProcessorException;
+import javax.media.NotConfiguredError;
+import javax.media.NotRealizedError;
+import javax.media.UnsupportedPlugInException;
+
+import video.effects.MotionDetectEffect;
+import video.effects.VideoEffect;
 import video.filters.motion.BorderMotionDetectionFilter;
+import video.util.VideoWorker;
 import engine.ui.UIException;
 import engine.util.Messages;
 import engine.util.MessagesErros;
@@ -42,7 +57,7 @@ public class KeyboardReader implements Runnable {
 
 	private String[] instructions;
 
-	private LinkedList<Filter> userFilters;
+	private Map<String,VideoEffect> userFilters;
 
 	private String[] filterList;
 
@@ -51,13 +66,22 @@ public class KeyboardReader implements Runnable {
 	public KeyboardReader() {
 
 		in = new Scanner(new InputStreamReader(System.in));
+
 		in.useDelimiter("\n");
-		instructions = new String[] { Messages.getString("command.new") };
-		userFilters = new LinkedList<Filter>();
+
+		instructions = new String[] { Messages.getString("command.new") ,
+				Messages.getString("command.apply") };
+
+		userFilters = new HashMap<String,VideoEffect>();
+
 		filterList = new String[] { Messages.getString("filter.motion.detect") };
-		colors = new String[] { Messages.getString("color.red"),Messages.getString("color.green"),
-				Messages.getString("color.blue"),Messages.getString("color.black"),
-				Messages.getString("color.yellow"),Messages.getString("color.cyan"),};
+
+		colors = new String[] { Messages.getString("color.red"),
+				Messages.getString("color.green"),
+				Messages.getString("color.blue"),
+				Messages.getString("color.black"),
+				Messages.getString("color.yellow"),
+				Messages.getString("color.cyan"), };
 	}
 
 	public void run() {
@@ -70,21 +94,22 @@ public class KeyboardReader implements Runnable {
 
 					StringTokenizer word = new StringTokenizer(line, " ");
 
-
 					// verify if has a valid entry
 					if (word.countTokens() <= 3)
-						throw new UIException(MessagesErros.getString("error.inavlid.arguments.numbers"));
+						throw new UIException(MessagesErros
+								.getString("error.inavlid.arguments.numbers"));
 
 					// get the instruction
-					int instruction = getInstruction(instructions, word.nextToken());
+					int instruction = getInstruction(instructions, word
+							.nextToken());
 
 					switch (instruction) {
 
 					case 0: // new insttuction.
 						createNewFilter(word);
 						break;
-					case 1:
-						System.out.println("old");
+					case 1: // apply
+						applyFilters(word);
 						break;
 					default:
 						System.out.println("?");
@@ -101,68 +126,153 @@ public class KeyboardReader implements Runnable {
 
 	}
 
-	private void createNewFilter(StringTokenizer word) throws UIException {
+	private void applyFilters(StringTokenizer word) throws UIException, NoProcessorException, UnsupportedPlugInException, NotConfiguredError, NotRealizedError, NoDataSinkException, SecurityException, IOException {
+		List<VideoEffect> tempEfxList = new LinkedList<VideoEffect>();
+		File inputFile = null;
+		String input = null;
+		String output = null;
+		String n = null;
 
-		if ( ! word.nextToken().equalsIgnoreCase(Messages.getString("command.new.filter")) )
-			throw new UIException(MessagesErros.getString("error.invalid.object"));
+		System.err.println("num1#"+word.countTokens());
 
-		// get The filter
-		int filterNum = getInstruction(filterList,word.nextToken());
+		boolean outFlag = false;
+		while ( ! outFlag ){
 
-		switch (filterNum) {
-			case 0: // motion detection
+			n = word.nextToken();
 
-				Color color = null;
-				String n = word.nextToken();
+			if (n.equalsIgnoreCase(Messages.getString("command.apply.filter"))
+					|| n == null) {
 
-				if ( n.startsWith("-c") ){
-					if (! word.hasMoreTokens())
-						new UIException(MessagesErros.getString("error.color.null"));
+				n = word.nextToken();
 
-					int colorNum = getInstruction(colors,word.nextToken());
+				VideoEffect efx = userFilters.get(n);
 
-					switch(colorNum){
+				if (efx == null)
+					throw new UIException(MessagesErros.getString("error.filter.cantfind")+n);
 
-						case 0:
-							color = Color.red;
-							break;
-						case 1:
-							color = Color.green;
-							break;
-						case 2:
-							color = Color.blue;
-							break;
-						case 3:
-							color = Color.black;
-							break;
-						case 4:
-							color = Color.yellow;
-							break;
-						case 5:
-							color = Color.cyan;
-							break;
-					}
+				tempEfxList.add(efx);
+			} else
+				outFlag = true;
 
 
-					MessagesErros.getString("error.color.null");
-
-
-
-
-				}
-
-				if (n.equalsIgnoreCase("help"))
-					System.out.println("help");
-
-				new BorderMotionDetectionFilter();
-				System.out.println("o");
-				break;
-			default:
-				System.out.println("---x---");
-				break;
 		}
 
-		String filteralias = word.nextToken();
+		System.err.println("-#"+n);
+		if ( n.equalsIgnoreCase(Messages.getString("command.input")) ){
+			input = word.nextToken();
+			System.out.println("r"+input);
+			inputFile = new File(input);
+		}
+
+
+		if ( word.nextToken().equalsIgnoreCase(Messages.getString("command.output")) )
+			output = word.nextToken();
+
+
+		//verificacoes
+
+//		if ( ! inputFile.exists() )
+//			throw new UIException(MessagesErros.getString("error.file.cantfind.input")+input+".");
+//		if ( output == null )
+//			throw new UIException(MessagesErros.getString("error.file.exist.output"));
+
+		String filePrefix = "file:/";
+
+
+		VideoWorker fa = new VideoWorker(new MediaLocator(filePrefix+input),new MediaLocator(filePrefix+output));
+
+		Codec[] cs = new Codec[tempEfxList.size()];
+
+		int i = 0;
+		for (Codec c : tempEfxList ) {
+			cs[i] = c;
+		}
+
+		fa.setCodec(cs);
+		//FIXME inciar um thread separada
+
+		fa.open();
+	}
+
+	private void createNewFilter(StringTokenizer word) throws UIException {
+
+		if (!word.nextToken().equalsIgnoreCase(
+				Messages.getString("command.new.filter")))
+			throw new UIException(MessagesErros
+					.getString("error.invalid.object"));
+
+		// get the filter
+		int filterNum = getInstruction(filterList, word.nextToken());
+
+		String filterAlias = word.nextToken();
+
+		switch (filterNum) {
+		case 0: // motion detection
+			newMotionFilter(word, filterAlias);
+			break;
+		default:
+			System.out.println("---x---");
+			break;
+		}
+
+	}
+
+	/**
+	 * create a new motion filter
+	 * @param word
+	 * @param filterAlias
+	 * @throws UIException
+	 */
+	private void newMotionFilter(StringTokenizer word, String filterAlias) throws UIException {
+		Color color = null;
+		if (word.hasMoreTokens()) {
+			String n = word.nextToken();
+
+			if (n.equalsIgnoreCase("help")){
+				System.out.println(Messages.getString("help.textui.motion.detect"));
+				return ;
+			}
+
+			if (n.startsWith("-c")) {
+				if (!word.hasMoreTokens())
+					new UIException(MessagesErros
+							.getString("error.color.null"));
+
+				int colorNum = getInstruction(colors, word.nextToken());
+
+				switch (colorNum) {
+
+				case 0:
+					color = Color.red;
+					break;
+				case 1:
+					color = Color.green;
+					break;
+				case 2:
+					color = Color.blue;
+					break;
+				case 3:
+					color = Color.black;
+					break;
+				case 4:
+					color = Color.yellow;
+					break;
+				case 5:
+					color = Color.cyan;
+					break;
+				default:
+					throw new UIException(Messages
+							.getString("error.color.invalid"));
+				} // switch color
+			} // if from color
+		} // if hasmoretokens
+
+		BorderMotionDetectionFilter thisFilter = color == null ? new BorderMotionDetectionFilter()
+				: new BorderMotionDetectionFilter(color);
+
+		userFilters.put(filterAlias,new MotionDetectEffect(thisFilter));
+
+		System.out.println(Messages.getString("sucess.textui.filters.create"));
 	}
 
 	private int getInstruction(String[] instructionset, String input) {
