@@ -1,15 +1,15 @@
 #summary Installing libs in linux system
 #labels Phase-Deploy,Phase-QA,Phase-Support
 
-= Installing jmf natives libs * =
+=== Installing jmf natives libs * ===
 
 cp jgve/resources/libs/jmf/libjm*.so $JAVA_HOME/jre/lib/i386/ 
 
 
-= Installing fobs4jmf natives libs * =
+=== Installing fobs4jmf natives libs * ===
 
 cp jgve/resources/libs/fobs4jmf/libfobs4jmf.so $JAVA_HOME/jre/lib/i386/
 
 
 
-*You must have write acesse to JAVA_HOME*
+* * You must have write acesse to JAVA_HOME*
