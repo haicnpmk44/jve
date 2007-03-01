@@ -37,22 +37,23 @@
 
 
 	<target name="run" depends="compile">
-		<echo> Execultando a aplicacao... </echo>
-		<java classname="view.text.PhotoArchive" fork="no">
+		<java classname="engine.ui.text.KeyboardReader" fork="no">
 			<classpath>
-				<pathelement path="${build.dir}" />
-				<pathelement path="${lib.dir}/*" />
-				<pathelement location="${lib.dir}/mysql310.jar" />
+				<pathelement location="${lib.dir}/fobs4jmf.jar" />
+				<pathelement location="${lib.dir}/log4j-1.2.14.jar" />
+				<pathelement location="${lib.dir}/jmf.jar" />
+				<pathelement location="${build.dir}" />
 			</classpath>
 		</java>
 	</target>
 
 
 	<target name="test" depends="init" description="executa os testes">
-		<java classname="testes.TestaTudo" fork="yes">
+		<java classname="engine.ui.text.KeyboardReader" fork="yes">
 			<classpath>
-				<pathelement location="${lib.dir}/junit.jar" />
-				<pathelement location="${lib.dir}/mysql310.jar" />
+				<pathelement location="${lib.dir}/fobs4jmf.jar" />
+				<pathelement location="${lib.dir}/log4j-1.2.14.jar" />
+				<pathelement location="${lib.dir}/jmf.jar" />
 				<pathelement location="${build.dir}" />
 			</classpath>
 		</java>
