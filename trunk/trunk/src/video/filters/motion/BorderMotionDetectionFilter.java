@@ -143,7 +143,7 @@ public class BorderMotionDetectionFilter extends MotionFilter {
 					if (c < ordem || c > (coluna - ordem) || l < ordem	|| l > (linha - ordem)) {
 						saida.setRGB(c, l, actualImage.getRGB(c, l));
 					} else {
-						//put a thread to each aplicaMascara
+						//FIXME put a thread to each aplicaMascara
 						int delta1 = aplicaMascara(c, l, actualImage, mask);
 						int delta2 = aplicaMascara(c, l, antecessorImage, mask);
 
