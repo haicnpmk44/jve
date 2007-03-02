@@ -27,7 +27,7 @@ import javax.media.format.VideoFormat;
 import javax.media.protocol.ContentDescriptor;
 import javax.media.protocol.DataSource;
 
-import video.effects.MotionDetectEffect;
+import video.effects.motion.MotionDetectEffect;
 
 /**
  * Sample program to access individual video frames by using a "pass-thru"

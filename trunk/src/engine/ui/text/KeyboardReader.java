@@ -42,8 +42,8 @@ import javax.media.NotConfiguredError;
 import javax.media.NotRealizedError;
 import javax.media.UnsupportedPlugInException;
 
-import video.effects.MotionDetectEffect;
 import video.effects.VideoEffect;
+import video.effects.motion.MotionDetectEffect;
 import video.filters.motion.BorderMotionDetectionFilter;
 import video.util.VideoWorker;
 import engine.ui.UIException;
