@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<project name="jgve" default="compile" basedir=".">
+<project name="jgve" default="build" basedir=".">
 
 	<description> Java grid video editor </description>
 
@@ -35,8 +35,12 @@
 		</javac>
 	</target>
 
+	<target name="build" depends="compile" description="build">
+			<copy file="${src.dir}/messages.properties" tofile="${build.dir}/messages.properties"/>
+			<copy file="${src.dir}/messages_err.properties" tofile="${build.dir}/messages_err.properties"/>
+	</target>
 
-	<target name="run" depends="compile">
+	<target name="run" depends="build">
 		<java classname="engine.ui.text.KeyboardReader" fork="yes">
 			<jvmarg value="-Dawt.toolkit=sun.awt.HeadlessToolkit"/>
 			<classpath>
