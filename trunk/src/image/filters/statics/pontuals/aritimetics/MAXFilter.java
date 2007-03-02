@@ -112,4 +112,9 @@ public class MAXFilter implements PointFilter {
 		return i;
 	}
 
+	public void setWorkingImage(BufferedImage wimg) {
+		image1 = wimg;
+
+	}
+
 }

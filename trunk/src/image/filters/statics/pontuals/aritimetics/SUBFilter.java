@@ -137,4 +137,9 @@ public class SUBFilter implements PointFilter {
 		this.constant = i;
 
 	}
+
+	public void setWorkingImage(BufferedImage wimg) {
+		image1 = wimg;
+
+	}
 }

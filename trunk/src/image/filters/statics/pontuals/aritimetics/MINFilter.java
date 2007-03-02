@@ -104,4 +104,9 @@ public class MINFilter implements PointFilter {
 		this.image2 = second;
 	}
 
+	public void setWorkingImage(BufferedImage wimg) {
+		image1 = wimg;
+
+	}
+
 }
