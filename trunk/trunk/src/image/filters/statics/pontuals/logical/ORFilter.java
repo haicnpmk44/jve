@@ -87,4 +87,10 @@ public class ORFilter implements PointFilter {
 
 	}
 
+	public void setWorkingImage(BufferedImage wimg) {
+		image1 = wimg;
+
+	}
+
+
 }

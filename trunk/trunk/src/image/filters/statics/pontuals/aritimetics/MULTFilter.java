@@ -113,4 +113,9 @@ public class MULTFilter implements PointFilter {
 
 	}
 
+	public void setWorkingImage(BufferedImage wimg) {
+		image1 = wimg;
+
+	}
+
 }

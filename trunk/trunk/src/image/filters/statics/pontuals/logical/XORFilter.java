@@ -83,4 +83,9 @@ public class XORFilter implements PointFilter {
 
 	}
 
+	public void setWorkingImage(BufferedImage wimg) {
+		image1 = wimg;
+
+	}
+
 }

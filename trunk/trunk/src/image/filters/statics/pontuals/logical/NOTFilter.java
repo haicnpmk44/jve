@@ -85,4 +85,10 @@ public class NOTFilter implements PointFilter {
 
 	}
 
+	public void setWorkingImage(BufferedImage wimg) {
+		image1 = wimg;
+
+	}
+
+
 }

@@ -15,6 +15,8 @@ public class IGSFilter implements PointFilter {
 	private BufferedImage image1;
 
 
+	public IGSFilter(){
+	}
 
 	/**
 	 * Build a filter that add a constant to one image
@@ -29,8 +31,6 @@ public class IGSFilter implements PointFilter {
 
 		int linha = image1.getHeight();
 		int coluna = image1.getWidth();
-
-		System.out.println("C "+ coluna+"\nL "+linha+"\n");
 
 		BufferedImage saida = new BufferedImage(coluna,linha,BufferedImage.TYPE_INT_RGB);
 
@@ -81,6 +81,11 @@ public class IGSFilter implements PointFilter {
 	}
 
 	public void setConstant(int i) {
+
+	}
+
+	public void setWorkingImage(BufferedImage wimg) {
+		image1 = wimg;
 
 	}
 
