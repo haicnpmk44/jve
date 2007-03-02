@@ -37,7 +37,8 @@
 
 
 	<target name="run" depends="compile">
-		<java classname="engine.ui.text.KeyboardReader" fork="no">
+		<java classname="engine.ui.text.KeyboardReader" fork="yes">
+			<jvmarg value="-Dawt.toolkit=sun.awt.HeadlessToolkit"/>
 			<classpath>
 				<pathelement location="${lib.dir}/fobs4jmf.jar" />
 				<pathelement location="${lib.dir}/log4j-1.2.14.jar" />
