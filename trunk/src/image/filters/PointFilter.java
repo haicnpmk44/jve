@@ -30,4 +30,6 @@ public interface PointFilter extends Filter{
 
 	public void setSecondImage(BufferedImage second);
 
+	public void setWorkingImage(BufferedImage wimg);
+
 }
