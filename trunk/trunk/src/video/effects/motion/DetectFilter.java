@@ -2,7 +2,7 @@
  * Created on May 13, 2005 , by Thiago N�brega
  *
  */
-package video.effects;
+package video.effects.motion;
 
 import image.filters.statics.pontuals.aritimetics.ADDFilter;
 import image.filters.statics.spatials.SpatialFilter;

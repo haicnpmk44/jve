@@ -23,7 +23,7 @@ import javax.media.protocol.DataSource;
 
 import org.apache.log4j.Logger;
 
-import video.effects.MotionDetectEffect;
+import video.effects.motion.MotionDetectEffect;
 import engine.logging.LogUtil;
 
 /**

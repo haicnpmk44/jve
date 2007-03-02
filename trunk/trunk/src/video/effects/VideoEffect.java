@@ -198,14 +198,14 @@ public abstract class VideoEffect implements Effect {
 	 * @param img
 	 * @return
 	 */
-	abstract BufferedImage processImage(BufferedImage img);
+	protected abstract BufferedImage processImage(BufferedImage img);
 
 	/**
 	 * Return the efect name
 	 *
 	 * @return name of the effect
 	 */
-	abstract String getEffectName();
+	public abstract String getEffectName();
 
 	/*
 	 * by Andy Dyble

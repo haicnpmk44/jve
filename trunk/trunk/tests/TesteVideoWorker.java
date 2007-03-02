@@ -32,7 +32,7 @@ import javax.media.NotConfiguredError;
 import javax.media.NotRealizedError;
 import javax.media.UnsupportedPlugInException;
 
-import video.effects.MotionDetectEffect;
+import video.effects.motion.MotionDetectEffect;
 import video.util.VideoWorker;
 
 public class TesteVideoWorker {

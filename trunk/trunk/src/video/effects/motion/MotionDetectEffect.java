@@ -21,12 +21,13 @@
  * TesteEffect.java created in 24/12/2006 - 3:56:12 PM
  * by Thiago Nobrega ( thiagonobrega at gmail dot com )
  */
-package video.effects;
+package video.effects.motion;
 
 import image.filters.FilterException;
 
 import java.awt.image.BufferedImage;
 
+import video.effects.VideoEffect;
 import video.filters.MotionFilter;
 import video.filters.motion.BorderMotionDetectionFilter;
 
@@ -47,7 +48,7 @@ public class MotionDetectEffect extends VideoEffect {
 	 * @see video.effects.VideoEffect#getEffectName()
 	 */
 	@Override
-	String getEffectName() {
+	public String getEffectName() {
 		return "Efeito de Teste";
 	}
 
@@ -55,7 +56,7 @@ public class MotionDetectEffect extends VideoEffect {
 	 * @see video.effects.VideoEffect#processImage(java.awt.image.BufferedImage)
 	 */
 	@Override
-	BufferedImage processImage(BufferedImage img) {
+	public BufferedImage processImage(BufferedImage img) {
 		//BufferedImage b = new RoadFilter(img).process();
 		//BufferedImage b = new DetectFilter(img).process();
 
