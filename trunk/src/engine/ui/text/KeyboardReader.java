@@ -23,6 +23,10 @@
  */
 package engine.ui.text;
 
+import image.filters.Filter;
+import image.filters.PointFilter;
+import image.filters.statics.pontuals.logical.IGSFilter;
+
 import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
@@ -44,6 +48,7 @@ import javax.media.UnsupportedPlugInException;
 
 import video.effects.VideoEffect;
 import video.effects.motion.MotionDetectEffect;
+import video.effects.statics.SimpleEffect;
 import video.filters.motion.BorderMotionDetectionFilter;
 import video.util.VideoWorker;
 import engine.ui.UIException;
@@ -57,7 +62,8 @@ public class KeyboardReader implements Runnable {
 	private String[] instructions;
 
 	private List<String> userFiltersName;
-	private Map<String,VideoEffect> userFilters;
+
+	private Map<String, VideoEffect> userFilters;
 
 	private String[] filterList;
 
@@ -70,15 +76,16 @@ public class KeyboardReader implements Runnable {
 		in.useDelimiter("\n");
 
 		instructions = new String[] { Messages.getString("command.exit"),
-				Messages.getString("command.help") ,
-				Messages.getString("command.new") ,
+				Messages.getString("command.help"),
+				Messages.getString("command.new"),
 				Messages.getString("command.apply"),
 				Messages.getString("command.list.user.filters") };
 
-		userFilters = new HashMap<String,VideoEffect>();
+		userFilters = new HashMap<String, VideoEffect>();
 		userFiltersName = new LinkedList<String>();
 
-		filterList = new String[] { Messages.getString("filter.motion.detect") };
+		filterList = new String[] { Messages.getString("filter.motion.detect") ,
+				Messages.getString("filter.static.igs")};
 
 		colors = new String[] { Messages.getString("color.red"),
 				Messages.getString("color.green"),
@@ -114,7 +121,8 @@ public class KeyboardReader implements Runnable {
 						System.exit(0);
 						break;
 					case 1:
-						System.out.println(Messages.getString("help.textui.usage"));
+						System.out.println(Messages
+								.getString("help.textui.usage"));
 						break;
 					case 2: // new insttuction.
 						createNewFilter(word);
@@ -142,13 +150,16 @@ public class KeyboardReader implements Runnable {
 
 	private void listUserFilters() {
 		System.out.print("[ ");
-		for (String s : userFiltersName ) {
+		for (String s : userFiltersName) {
 			System.out.print(s + " ");
 		}
 		System.out.println("]");
 	}
 
-	private void applyFilters(StringTokenizer word) throws UIException, NoProcessorException, UnsupportedPlugInException, NotConfiguredError, NotRealizedError, NoDataSinkException, SecurityException, IOException {
+	private void applyFilters(StringTokenizer word) throws UIException,
+			NoProcessorException, UnsupportedPlugInException,
+			NotConfiguredError, NotRealizedError, NoDataSinkException,
+			SecurityException, IOException {
 		List<VideoEffect> tempEfxList = new LinkedList<VideoEffect>();
 		File inputFile = null;
 		String input = null;
@@ -156,7 +167,7 @@ public class KeyboardReader implements Runnable {
 		String n = null;
 
 		boolean outFlag = false;
-		while ( ! outFlag ){
+		while (!outFlag) {
 
 			n = word.nextToken();
 
@@ -168,47 +179,49 @@ public class KeyboardReader implements Runnable {
 				VideoEffect efx = userFilters.get(n);
 
 				if (efx == null)
-					throw new UIException(MessagesErros.getString("error.filter.cantfind")+n);
+					throw new UIException(MessagesErros
+							.getString("error.filter.cantfind")
+							+ n);
 
 				tempEfxList.add(efx);
 			} else
 				outFlag = true;
 
-
 		}
 
-
-		if ( n.equalsIgnoreCase(Messages.getString("command.input")) ){
+		if (n.equalsIgnoreCase(Messages.getString("command.input"))) {
 			input = word.nextToken();
 			inputFile = new File(input);
 		}
 
-
-		if ( word.nextToken().equalsIgnoreCase(Messages.getString("command.output")) )
+		if (word.nextToken().equalsIgnoreCase(
+				Messages.getString("command.output")))
 			output = word.nextToken();
 
+		// verificacoes
 
-		//verificacoes
-
-		if ( ! inputFile.exists() )
-			throw new UIException(MessagesErros.getString("error.file.cantfind.input")+input+".");
-		if ( output == null )
-			throw new UIException(MessagesErros.getString("error.file.exist.output"));
+		if (!inputFile.exists())
+			throw new UIException(MessagesErros
+					.getString("error.file.cantfind.input")
+					+ input + ".");
+		if (output == null)
+			throw new UIException(MessagesErros
+					.getString("error.file.exist.output"));
 
 		String filePrefix = "file:/";
 
-
-		VideoWorker fa = new VideoWorker(new MediaLocator(filePrefix+input),new MediaLocator(filePrefix+output));
+		VideoWorker fa = new VideoWorker(new MediaLocator(filePrefix + input),
+				new MediaLocator(filePrefix + output));
 
 		Codec[] cs = new Codec[tempEfxList.size()];
 
 		int i = 0;
-		for (Codec c : tempEfxList ) {
+		for (Codec c : tempEfxList) {
 			cs[i] = c;
 		}
 
 		fa.setCodec(cs);
-		//FIXME inciar um thread separada
+		// FIXME inciar um thread separada
 
 		fa.open();
 	}
@@ -229,6 +242,12 @@ public class KeyboardReader implements Runnable {
 		case 0: // motion detection
 			newMotionFilter(word, filterAlias);
 			break;
+		case 1:
+			SimpleEffect thisEfx = new SimpleEffect(new IGSFilter());
+			userFilters.put(filterAlias, thisEfx);
+			userFiltersName.add(filterAlias);
+			System.out.println(Messages.getString("sucess.textui.filters.create"));
+			break;
 		default:
 			System.out.println("---x---");
 			break;
@@ -238,24 +257,26 @@ public class KeyboardReader implements Runnable {
 
 	/**
 	 * create a new motion filter
+	 *
 	 * @param word
 	 * @param filterAlias
 	 * @throws UIException
 	 */
-	private void newMotionFilter(StringTokenizer word, String filterAlias) throws UIException {
+	private void newMotionFilter(StringTokenizer word, String filterAlias)
+			throws UIException {
 		Color color = null;
 		if (word.hasMoreTokens()) {
 			String n = word.nextToken();
 
-			if (n.equalsIgnoreCase("help")){
-				System.out.println(Messages.getString("help.textui.motion.detect"));
-				return ;
+			if (n.equalsIgnoreCase("help")) {
+				System.out.println(Messages
+						.getString("help.textui.motion.detect"));
+				return;
 			}
 
 			if (n.startsWith("-c")) {
 				if (!word.hasMoreTokens())
-					new UIException(MessagesErros
-							.getString("error.color.null"));
+					new UIException(MessagesErros.getString("error.color.null"));
 
 				int colorNum = getInstruction(colors, word.nextToken());
 
@@ -289,7 +310,7 @@ public class KeyboardReader implements Runnable {
 		BorderMotionDetectionFilter thisFilter = color == null ? new BorderMotionDetectionFilter()
 				: new BorderMotionDetectionFilter(color);
 
-		userFilters.put(filterAlias,new MotionDetectEffect(thisFilter));
+		userFilters.put(filterAlias, new MotionDetectEffect(thisFilter));
 		userFiltersName.add(filterAlias);
 
 		System.out.println(Messages.getString("sucess.textui.filters.create"));
