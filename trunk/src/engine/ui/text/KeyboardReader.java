@@ -23,8 +23,7 @@
  */
 package engine.ui.text;
 
-import image.filters.Filter;
-import image.filters.PointFilter;
+import image.filters.statics.pontuals.color.Color2GrayScale;
 import image.filters.statics.pontuals.logical.IGSFilter;
 
 import java.awt.Color;
@@ -85,7 +84,8 @@ public class KeyboardReader implements Runnable {
 		userFiltersName = new LinkedList<String>();
 
 		filterList = new String[] { Messages.getString("filter.motion.detect") ,
-				Messages.getString("filter.static.igs")};
+				Messages.getString("filter.static.igs") ,
+				Messages.getString("filter.static.color.color2gray")};
 
 		colors = new String[] { Messages.getString("color.red"),
 				Messages.getString("color.green"),
@@ -245,6 +245,12 @@ public class KeyboardReader implements Runnable {
 		case 1:
 			SimpleEffect thisEfx = new SimpleEffect(new IGSFilter());
 			userFilters.put(filterAlias, thisEfx);
+			userFiltersName.add(filterAlias);
+			System.out.println(Messages.getString("sucess.textui.filters.create"));
+			break;
+		case 2:
+			SimpleEffect thisEfxc = new SimpleEffect(new Color2GrayScale());
+			userFilters.put(filterAlias, thisEfxc);
 			userFiltersName.add(filterAlias);
 			System.out.println(Messages.getString("sucess.textui.filters.create"));
 			break;
