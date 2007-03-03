@@ -22,6 +22,8 @@
  * TesteVideoWorker.java created in 27/12/2006 - 2:32:43 AM
  * @author Thiago Nóbrega ( thiagonobrega at gmail dot com )
  */
+import image.filters.statics.pontuals.logical.IGSFilter;
+
 import java.io.IOException;
 
 import javax.media.Codec;
@@ -33,6 +35,7 @@ import javax.media.NotRealizedError;
 import javax.media.UnsupportedPlugInException;
 
 import video.effects.motion.MotionDetectEffect;
+import video.effects.statics.SimpleEffect;
 import video.util.VideoWorker;
 
 public class TesteVideoWorker {
@@ -60,7 +63,10 @@ public class TesteVideoWorker {
 
 
 		VideoWorker fa = new VideoWorker(new MediaLocator(url),new MediaLocator(out));
-		Codec codec[] = {new MotionDetectEffect()};
+//		Codec codec[] = {new MotionDetectEffect()};
+		SimpleEffect f = new SimpleEffect();
+		f.setImageFilter(new IGSFilter());
+		Codec codec[] = {f};
 		fa.setCodec(codec);
 
 		// TODO PROBLEMAS DE SICRONIZAÇÃO
