@@ -32,8 +32,6 @@ public class ANDFilter implements PointFilter {
 		int linha = image1.getHeight();
 		int coluna = image1.getWidth();
 
-		System.out.println("C "+ coluna+"\nL "+linha+"\n");
-
 		BufferedImage saida = new BufferedImage(coluna,linha,BufferedImage.TYPE_INT_RGB);
 
 		Color color1;
