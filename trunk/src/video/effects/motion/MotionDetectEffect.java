@@ -49,7 +49,7 @@ public class MotionDetectEffect extends VideoEffect {
 	 */
 	@Override
 	public String getEffectName() {
-		return "Efeito de Teste";
+		return "Motion Detect";
 	}
 
 	/* (non-Javadoc)
