@@ -100,44 +100,8 @@ public class KeyboardReader implements Runnable {
 		while (true) {
 			try {
 				while (in.hasNext()) {
-
-					String line = in.next().trim();
-
-					StringTokenizer word = new StringTokenizer(line, " ");
-
-					// verify if has a valid entry
-					if (word.countTokens() <= 0)
-						throw new UIException(MessagesErros
-								.getString("error.inavlid.arguments.numbers"));
-
-					// get the instruction
-					int instruction = getInstruction(instructions, word
-							.nextToken());
-
-					switch (instruction) {
-
-					case 0:
-						System.out.println(Messages.getString("sucess.exit"));
-						System.exit(0);
-						break;
-					case 1:
-						System.out.println(Messages
-								.getString("help.textui.usage"));
-						break;
-					case 2: // new insttuction.
-						createNewFilter(word);
-						break;
-					case 3: // apply
-						applyFilters(word);
-						break;
-					case 4: // list
-						listUserFilters();
-						break;
-					default:
-						System.out.println("?");
-						break;
-					}
-
+					String line = in.next();
+					runLine(line);
 				}
 
 			} catch (Exception e) {
@@ -146,6 +110,45 @@ public class KeyboardReader implements Runnable {
 
 		}// while true
 
+	}
+
+	public void runLine(String line) throws UIException, NoProcessorException, UnsupportedPlugInException, NotConfiguredError, NotRealizedError, NoDataSinkException, IOException {
+		line = line.trim();
+
+		StringTokenizer word = new StringTokenizer(line, " ");
+
+		// verify if has a valid entry
+		if (word.countTokens() <= 0)
+			throw new UIException(MessagesErros
+					.getString("error.inavlid.arguments.numbers"));
+
+		// get the instruction
+		int instruction = getInstruction(instructions, word
+				.nextToken());
+
+		switch (instruction) {
+
+		case 0:
+			System.out.println(Messages.getString("sucess.exit"));
+			System.exit(0);
+			break;
+		case 1:
+			System.out.println(Messages
+					.getString("help.textui.usage"));
+			break;
+		case 2: // new insttuction.
+			createNewFilter(word);
+			break;
+		case 3: // apply
+			applyFilters(word);
+			break;
+		case 4: // list
+			listUserFilters();
+			break;
+		default:
+			System.out.println("?");
+			break;
+		}
 	}
 
 	private void listUserFilters() {

@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="lib/fobs4jmf.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-1.2.14.jar"/>
 	<classpathentry kind="lib" path="lib/jmf.jar" sourcepath="/home/thiago/MeusDocumentos/ufcg/smultimidia/docs/jmf-2_1_1e-scsl-src.zip"/>
+	<classpathentry kind="lib" path="lib/ourgrid.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
