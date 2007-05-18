@@ -1,7 +1,0 @@
-new filter motiondetect mf1
-list
-apply -f mf1 -input /home/thiago/workspace/java/jgve/resources/01.avi -output /tmp/oi.avi
-
-new filter 2grayScale g
-list
-apply -f g -input c:\users\thiago\videos\sm\p1.avi -output c:\users\thiago\Desktop\output.avi
