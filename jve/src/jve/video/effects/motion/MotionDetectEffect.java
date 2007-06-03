@@ -21,15 +21,14 @@
  * TesteEffect.java created in 24/12/2006 - 3:56:12 PM
  * by Thiago Nobrega ( thiagonobrega at gmail dot com )
  */
-package video.effects.motion;
-
-import image.filters.FilterException;
+package jve.video.effects.motion;
 
 import java.awt.image.BufferedImage;
 
-import video.effects.VideoEffect;
-import video.filters.MotionFilter;
-import video.filters.motion.BorderMotionDetectionFilter;
+import jve.image.filters.FilterException;
+import jve.video.effects.VideoEffect;
+import jve.video.filters.MotionFilter;
+import jve.video.filters.motion.BorderMotionDetectionFilter;
 
 public class MotionDetectEffect extends VideoEffect {
 

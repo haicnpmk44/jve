@@ -2,15 +2,14 @@
  * Created on May 13, 2005 , by Thiago N�brega
  *
  */
-package video.effects.motion;
-
-import image.filters.statics.pontuals.aritimetics.ADDFilter;
-import image.filters.statics.spatials.SpatialFilter;
-import image.util.Mask;
+package jve.video.effects.motion;
 
 import java.awt.Color;
-import java.awt.PageAttributes.OriginType;
 import java.awt.image.BufferedImage;
+
+import jve.image.filters.statics.pontuals.aritimetics.ADDFilter;
+import jve.image.filters.statics.spatials.SpatialFilter;
+import jve.image.util.Mask;
 
 /**
  * Filtro da mediana este filtro calcula a media da area e faz um suaviza��o dos contrastes diminuindo os contornos
