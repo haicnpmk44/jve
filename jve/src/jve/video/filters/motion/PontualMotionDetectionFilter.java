@@ -27,7 +27,7 @@ package jve.video.filters.motion;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
-import jve.video.filters.MotionFilter;
+import jve.video.effects.filter.MotionFilter;
 
 
 /**

@@ -28,7 +28,7 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 import jve.image.util.Mask;
-import jve.video.filters.MotionFilter;
+import jve.video.effects.filter.MotionFilter;
 
 /**
  * TODO describe the algorithm

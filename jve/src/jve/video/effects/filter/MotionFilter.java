@@ -22,7 +22,7 @@
  * MotionDetectFilter.java created in 07/01/2007 - 3:01:11 PM
  * @author Thiago Nóbrega ( thiagonobrega at gmail dot com )
  */
-package jve.video.filters;
+package jve.video.effects.filter;
 
 
 import java.awt.image.BufferedImage;
