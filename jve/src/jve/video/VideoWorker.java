@@ -22,7 +22,6 @@ import javax.media.protocol.ContentDescriptor;
 import javax.media.protocol.DataSource;
 
 import jve.engine.logging.LogUtil;
-import jve.video.effects.motion.MotionDetectEffect;
 
 import org.apache.log4j.Logger;
 
