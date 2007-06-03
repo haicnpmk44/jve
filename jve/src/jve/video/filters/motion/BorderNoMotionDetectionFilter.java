@@ -30,7 +30,9 @@ import java.awt.image.BufferedImage;
 import jve.image.util.Mask;
 import jve.video.filters.MotionFilter;
 
-
+/**
+ * TODO describe the algorithm
+ */
 
 public class BorderNoMotionDetectionFilter extends MotionFilter {
 
@@ -43,14 +45,12 @@ public class BorderNoMotionDetectionFilter extends MotionFilter {
 
 	public BorderNoMotionDetectionFilter() {
 		constant = 50;
-		setName("Border No Motion Detection Filter");
 		contourColor = Color.yellow.getRGB();
 		setUpMask();
 	}
 
 	public BorderNoMotionDetectionFilter(Color c) {
 		constant = 50;
-		setName("Border No Motion Detection Filter");
 		contourColor = c.getRGB();
 		setUpMask();
 	}
@@ -133,9 +133,7 @@ public class BorderNoMotionDetectionFilter extends MotionFilter {
 		BufferedImage saida = new BufferedImage(coluna, linha,
 				BufferedImage.TYPE_INT_RGB);
 
-		Color color1;
-		int r, g, b;
-
+		
 		if (antecessorImage != null) {
 
 			for (int c = 0; c < coluna; c++) {
