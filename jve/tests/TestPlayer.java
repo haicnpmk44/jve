@@ -1,13 +1,7 @@
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Frame;
 import java.io.File;
-import java.util.StringTokenizer;
 
 import javax.media.Codec;
-import javax.media.ConfigureCompleteEvent;
 import javax.media.ControllerEvent;
 import javax.media.ControllerListener;
 import javax.media.DataSink;
@@ -15,10 +9,7 @@ import javax.media.EndOfMediaEvent;
 import javax.media.Manager;
 import javax.media.MediaLocator;
 import javax.media.NotConfiguredError;
-import javax.media.PrefetchCompleteEvent;
 import javax.media.Processor;
-import javax.media.RealizeCompleteEvent;
-import javax.media.ResourceUnavailableEvent;
 import javax.media.StopAtTimeEvent;
 import javax.media.UnsupportedPlugInException;
 import javax.media.control.TrackControl;
@@ -27,7 +18,7 @@ import javax.media.format.VideoFormat;
 import javax.media.protocol.ContentDescriptor;
 import javax.media.protocol.DataSource;
 
-import video.effects.motion.MotionDetectEffect;
+import jve.video.effects.motion.MotionDetectEffect;
 
 /**
  * Sample program to access individual video frames by using a "pass-thru"
