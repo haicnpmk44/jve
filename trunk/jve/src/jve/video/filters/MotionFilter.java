@@ -30,11 +30,13 @@ import java.awt.image.BufferedImage;
 import jve.video.util.VideoFilter;
 import jve.video.util.VideoFilterException;
 
+/**
+ * This class is used to process frames , related to a vector of previous frame... <br>
+ * 
+ * Thanx to Flavio Cordula ... 
+ */
 public abstract class MotionFilter implements VideoFilter {
 
-
-	protected static String name = "Generic Motion Filter";
-	protected static String group = "Motion Filter";
 
 	private BufferedImage workImage;
 	private BufferedImage antecessor;
@@ -75,35 +77,12 @@ public abstract class MotionFilter implements VideoFilter {
 			throw new VideoFilterException("Diferent images size");
 	}
 
-
-	/*
-	 * Gets the filter name;
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/*
-	 * Gets the filter groups
-	 */
-	public String getGroup() {
-		return group;
-	}
-
 	/**
 	 * Sets the image that actual, to be processed.
 	 * @param second
 	 */
 	public void setWorkingImage(BufferedImage second) {
 		this.workImage = second;
-	}
-
-	public static void setGroup(String group) {
-		MotionFilter.group = group;
-	}
-
-	public static void setName(String name) {
-		MotionFilter.name = name;
 	}
 
 }

@@ -44,14 +44,12 @@ public class PontualMotionDetectionFilter extends MotionFilter {
 	public PontualMotionDetectionFilter(){
 		super();
 		this.contourColor = Color.yellow.getRGB();
-		setName("Pontual Motion Detection");
 
 	}
 
 	public PontualMotionDetectionFilter(Color c){
 		super();
 		this.contourColor = c.getRGB();
-		setName("Pontual Motion Detection");
 	}
 
 	/* (non-Javadoc)
