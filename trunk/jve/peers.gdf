@@ -1,7 +1,0 @@
-	label: Peer do LCC
-	name : seulunga.lsd.ufcg.edu.br
-	port : 3080
-
-	label: Peer do LSD
-	name : peer.lsd.ufcg.edu.br
-	port : 3080
