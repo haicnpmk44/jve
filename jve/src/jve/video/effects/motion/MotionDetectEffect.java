@@ -25,14 +25,19 @@ package jve.video.effects.motion;
 
 import java.awt.image.BufferedImage;
 
-import jve.image.filters.FilterException;
+import org.apache.log4j.Logger;
+
+import jve.engine.logging.LogUtil;
+import jve.video.VideoWorker;
 import jve.video.effects.VideoEffect;
 import jve.video.filters.MotionFilter;
 import jve.video.filters.motion.BorderMotionDetectionFilter;
+import jve.video.util.VideoFilterException;
 
 public class MotionDetectEffect extends VideoEffect {
 
 	private MotionFilter frameEfx;
+	private Logger logger = LogUtil.getLog(MotionDetectEffect.class);
 
 	public MotionDetectEffect(){
 		super();
@@ -63,9 +68,8 @@ public class MotionDetectEffect extends VideoEffect {
 		try {
 			frameEfx.setWorkingImage(img);
 			b = frameEfx.process();
-		} catch (FilterException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (VideoFilterException e) {
+			logger.info(e);
 			return null;
 		}
 		//BufferedImage a = new ADDFilter(img,b).process();

@@ -43,9 +43,12 @@ import com.sun.media.codec.video.colorspace.JavaRGBConverter;
 
 /**
  *
- * This is de basic Video Effect, All Video effect will extentds this
- *  class.
- *
+ * This is de basic Video Effect, All Video effect will extentds this class.<br>
+ * 
+ * In this class we can set the video and audio codecs , input ( source ) / output ( dest ).  
+ * 
+ * 
+ *   
  * VideoEffect.java created in 24/12/2006 - 1:25:14 PM
  * @author Thiago Nóbrega ( thiagonobrega at gmail dot com )
  */

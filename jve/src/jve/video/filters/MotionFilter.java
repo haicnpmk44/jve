@@ -25,13 +25,12 @@
 package jve.video.filters;
 
 
-import java.awt.Color;
 import java.awt.image.BufferedImage;
 
-import jve.image.filters.Filter;
-import jve.image.filters.FilterException;
+import jve.video.util.VideoFilter;
+import jve.video.util.VideoFilterException;
 
-public abstract class MotionFilter implements Filter {
+public abstract class MotionFilter implements VideoFilter {
 
 
 	protected static String name = "Generic Motion Filter";
@@ -56,7 +55,7 @@ public abstract class MotionFilter implements Filter {
 	 * (non-Javadoc)
 	 * @see image.filters.Filter#process()
 	 */
-	public BufferedImage process() throws FilterException {
+	public BufferedImage process() throws VideoFilterException {
 		verifyFrameSize();
 		BufferedImage out = frameProcess(workImage,antecessor);
 		antecessor = workImage;
@@ -71,9 +70,9 @@ public abstract class MotionFilter implements Filter {
 	 */
 	public abstract BufferedImage frameProcess(BufferedImage actualImage , BufferedImage antecessorImage );
 
-	private void verifyFrameSize() throws FilterException {
+	private void verifyFrameSize() throws VideoFilterException {
 		if ( antecessor != null && ( antecessor.getHeight() != workImage.getHeight() || antecessor.getWidth() != workImage.getWidth() ) )
-			throw new FilterException("Diferent images size");
+			throw new VideoFilterException("Diferent images size");
 	}
 
 
