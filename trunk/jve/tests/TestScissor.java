@@ -1,9 +1,6 @@
-import javax.media.Manager;
 import javax.media.MediaLocator;
-import javax.media.Processor;
-import javax.media.Time;
 
-import video.util.segmentation.Scissors;
+import jve.video.util.segmentation.Scissors;
 
 
 public class TestScissor {

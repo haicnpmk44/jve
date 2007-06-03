@@ -22,8 +22,6 @@
  * TesteVideoWorker.java created in 27/12/2006 - 2:32:43 AM
  * @author Thiago Nóbrega ( thiagonobrega at gmail dot com )
  */
-import image.filters.statics.pontuals.logical.IGSFilter;
-
 import java.io.IOException;
 
 import javax.media.Codec;
@@ -34,9 +32,9 @@ import javax.media.NotConfiguredError;
 import javax.media.NotRealizedError;
 import javax.media.UnsupportedPlugInException;
 
-import video.effects.motion.MotionDetectEffect;
-import video.effects.statics.SimpleEffect;
-import video.util.VideoWorker;
+import jve.image.filters.statics.pontuals.logical.IGSFilter;
+import jve.video.effects.statics.SimpleEffect;
+import jve.video.util.VideoWorker;
 
 public class TesteVideoWorker {
 	/**
