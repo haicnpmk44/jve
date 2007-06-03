@@ -48,11 +48,11 @@ import jve.engine.util.Messages;
 import jve.engine.util.MessagesErros;
 import jve.image.filters.statics.pontuals.color.Color2GrayScale;
 import jve.image.filters.statics.pontuals.logical.IGSFilter;
+import jve.video.VideoWorker;
 import jve.video.effects.VideoEffect;
 import jve.video.effects.motion.MotionDetectEffect;
 import jve.video.effects.statics.SimpleEffect;
 import jve.video.filters.motion.BorderMotionDetectionFilter;
-import jve.video.util.VideoWorker;
 
 
 public class KeyboardReader implements Runnable {

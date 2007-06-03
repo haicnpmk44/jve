@@ -25,18 +25,17 @@
 package jve.video.filters;
 
 
-import java.awt.Color;
 import java.awt.image.BufferedImage;
 
-import jve.image.filters.Filter;
-import jve.image.filters.FilterException;
+import jve.video.util.VideoFilter;
+import jve.video.util.VideoFilterException;
 
 /**
  *
  * Processa apenas um frame ( nao leva em conta os vizinhos )
  *
  */
-public abstract class StaticFilter implements Filter {
+public abstract class StaticFilter implements VideoFilter {
 
 
 	protected static String name = "Static Filter";
@@ -60,7 +59,7 @@ public abstract class StaticFilter implements Filter {
 	 * (non-Javadoc)
 	 * @see image.filters.Filter#process()
 	 */
-	public BufferedImage process() throws FilterException {
+	public BufferedImage process() throws VideoFilterException {
 		BufferedImage out = frameProcess(workImage);
 		return out;
 	}

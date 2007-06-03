@@ -33,8 +33,8 @@ import javax.media.NotRealizedError;
 import javax.media.UnsupportedPlugInException;
 
 import jve.image.filters.statics.pontuals.logical.IGSFilter;
+import jve.video.VideoWorker;
 import jve.video.effects.statics.SimpleEffect;
-import jve.video.util.VideoWorker;
 
 public class TesteVideoWorker {
 	/**

@@ -1,4 +1,4 @@
-package jve.video.util;
+package jve.video;
 
 import java.io.IOException;
 
