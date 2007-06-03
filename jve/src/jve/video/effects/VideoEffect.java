@@ -1,4 +1,4 @@
-package video.effects;
+package jve.video.effects;
 /**
  *
  * JGVE - J Grid Video Editor.
@@ -23,8 +23,6 @@ package video.effects;
  * VideoEffect.java created in 24/12/2006 - 11:19:29 AM
  * @author Thiago Nóbrega ( thiagonobrega at gmail dot com )
  */
-import image.filters.Filter;
-
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 
@@ -37,13 +35,11 @@ import javax.media.ResourceUnavailableException;
 import javax.media.format.RGBFormat;
 import javax.media.format.VideoFormat;
 
+import jve.engine.logging.LogUtil;
+
 import org.apache.log4j.Logger;
 
-import video.util.VideoWorker;
-
 import com.sun.media.codec.video.colorspace.JavaRGBConverter;
-
-import engine.logging.LogUtil;
 
 /**
  *

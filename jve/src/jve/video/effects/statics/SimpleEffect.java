@@ -21,17 +21,16 @@
  * SimpleFilter.java created in 02/03/2007 - 9:42:26 PM
  * by Thiago Nobrega ( thiagonobrega at gmail dot com )
  */
-package video.effects.statics;
-
-import image.filters.FilterException;
-import image.filters.PointFilter;
+package jve.video.effects.statics;
 
 import java.awt.image.BufferedImage;
 
-import org.apache.log4j.Logger;
+import jve.engine.logging.LogUtil;
+import jve.image.filters.FilterException;
+import jve.image.filters.PointFilter;
+import jve.video.effects.VideoEffect;
 
-import video.effects.VideoEffect;
-import engine.logging.LogUtil;
+import org.apache.log4j.Logger;
 
 public class SimpleEffect extends VideoEffect {
 
