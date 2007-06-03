@@ -30,8 +30,8 @@ import org.apache.log4j.Logger;
 import jve.engine.logging.LogUtil;
 import jve.video.VideoWorker;
 import jve.video.effects.VideoEffect;
-import jve.video.effects.filter.MotionFilter;
-import jve.video.filters.motion.BorderMotionDetectionFilter;
+import jve.video.effects.motion.filter.BorderMotionDetectionFilter;
+import jve.video.effects.motion.filter.MotionFilter;
 import jve.video.util.VideoFilterException;
 
 public class MotionDetectEffect extends VideoEffect {
