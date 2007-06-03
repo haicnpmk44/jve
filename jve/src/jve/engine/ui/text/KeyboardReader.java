@@ -51,8 +51,8 @@ import jve.image.filters.statics.pontuals.logical.IGSFilter;
 import jve.video.VideoWorker;
 import jve.video.effects.VideoEffect;
 import jve.video.effects.motion.MotionDetectEffect;
+import jve.video.effects.motion.filter.BorderMotionDetectionFilter;
 import jve.video.effects.statics.SimpleEffect;
-import jve.video.filters.motion.BorderMotionDetectionFilter;
 
 
 public class KeyboardReader implements Runnable {
